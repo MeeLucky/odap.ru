@@ -1,0 +1,99 @@
+body {
+	background: url(../img/rubik.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	margin: 0px;
+}
+
+/*<HEADER*/
+header {
+	background: #0072ff;
+	max-width: 750px;
+	height: 70px;
+	margin: 0 auto;
+	border-bottom-right-radius: 5em 18em;
+	border-bottom-left-radius: 5em 18em;
+}
+
+header ul {
+	margin: 0px;
+	padding: 0px;
+	display: flex;
+	justify-content: space-around;
+}
+
+header ul li {
+	display: inline-block;
+	list-style-type: none;
+	margin-top: 20px;
+}
+
+header ul li a {
+	color: white;
+	text-decoration: none;
+	padding: 5px 10px;
+	font-size: 18px;
+	font-family: Helvetica;
+}
+
+header ul li a:hover {
+	color: red;
+	text-shadow: 1px 1px 2px;
+	cursor: pointer;
+}
+/*HEADER>*/
+
+/*<ADD FORM*/
+.FormWrapper {
+	position: fixed;
+	width: 100vw;
+	height: 100vh;
+	top: 0px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.Form {
+	background: white;
+	margin: 0 auto;
+	text-align: center;
+	padding: 20px;
+	border-radius: 10px;
+	z-index: 11;
+}
+
+.FormCover {
+	position: fixed;
+	background: #00000099;
+	width: 100vw;
+	height: 100vh;
+	top: 0px;
+	z-index: 10;
+}
+
+.Form input {
+	font-size: 18px;
+	margin-bottom: 5px;
+	width: 90px;
+}
+
+.Form button {
+	font-size: 18px;
+}
+
+.addForm input:first-child {
+	width: 190px;
+	font-size: 19px;
+}
+/*ADD FORM>*/
+
+main {
+	margin: 0 auto;
+	margin-top: 50px;
+	background: white;
+	max-width: 715px;
+	min-width: 500px;
+	height: 500px;
+}
