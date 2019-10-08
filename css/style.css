@@ -97,3 +97,10 @@ main {
 	min-width: 500px;
 	height: 500px;
 }
+
+.tables {
+	font-size: 18px;
+	border-collapse: collapse; 
+	width: 100%; 
+	text-align: center;
+}
