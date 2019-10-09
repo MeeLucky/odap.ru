@@ -1,13 +1,16 @@
 <?php
 $result = "<li><a onclick='SignIn()'>Войти</a></li>";
 
-if($_SESSION['sign'] == "Admin")
-	$result = "<li><a onclick='SignOut()'>".$_SESSION['sign']."</a></li>";
+if(isset($_SESSION['sign']))
+	$result = "<li><a href='../index.php'>результаты соревнований</a></li>
+		<li><a href='../mytables.php'>".$_SESSION['sign']."</a></li>
+		<li><a onclick='SignOut()'>выйти</a></li>";
+else
+	$result = "<li><a href='../index.php'>результаты соревнований</a></li>
+		<li><a onclick='SignIn()'>Войти</a></li>";
 ?>
 <header>
 	<ul>
-		<li><a href="../index.php">Результаты соревнований</a></li>
-		<li><a href="../mytables.php">Мои таблицы</a></li>
 		<?=$result?>
 	</ul>
 </header>	

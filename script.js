@@ -42,3 +42,24 @@ function CloseForm ()
 {
 	$('.FormWrapper').remove();
 }
+
+function DelTable ()
+{
+	alert("NotImplement");
+}
+
+function AddRecord ()
+{
+	$.ajax({
+		url: "elems/formAddOneResult.php",
+		data: "",
+		success: function (response) {
+			$('body').append(response);
+		}
+	});
+}
+
+function DelRecord ()
+{
+	alert("NotImplement");
+}

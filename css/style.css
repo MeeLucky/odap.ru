@@ -4,6 +4,7 @@ body {
 	background-size: cover;
 	background-attachment: fixed;
 	margin: 0px;
+	font-family: Helvetica;
 }
 
 /*<HEADER*/
@@ -96,6 +97,7 @@ main {
 	max-width: 715px;
 	min-width: 500px;
 	height: 500px;
+	border-radius: 5px;
 }
 
 .tables {
@@ -103,4 +105,56 @@ main {
 	border-collapse: collapse; 
 	width: 100%; 
 	text-align: center;
+	margin-top: 5px;
+}
+
+summary:focus { outline: none; }
+details {
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	font-size: 18px;
+	padding: 10px;
+}
+
+.addRecord {
+	background: #00e600;
+	border: 1px solid #008000;
+	border-radius: 5px;
+	font-size: 16px;
+	font-weight: 700;
+	padding: 5px 8px;
+}
+
+.delTable span {
+	font-size: 25px;
+	line-height: 0px;
+	position: relative;
+	top: 3px;
+	color: white;
+	font-family: cursive;
+	margin: 0px;
+	padding: 0px;
+}
+
+.delTable:focus { outline: none; }
+.addRecord:focus { outline: none; }
+.delRecord:focus { outline: none; }
+
+.delTable {
+	background: #ff0000;
+	border: 1px solid #cc0000;
+	border-radius: 5px;
+	font-size: 16px;
+	font-weight: 700;
+	padding: 5px 8px;
+}
+
+.delRecord {
+	background: #ff0000;
+	border: 1px solid #cc0000;
+	font-size: 20px;
+	line-height: 0px;
+	color: white;
+	font-family: cursive;
 }

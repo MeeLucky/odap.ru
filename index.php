@@ -8,47 +8,32 @@
 	<?php include "elems/header.php"?>
 	<main>
 <?php 
+include "PHPFunctions.php";
 include "DBconnect.php";
+
+//Get all public records
 $query = "SELECT tableid, fio, try1, try2, try3, try4, try5, avg 
 FROM records WHERE tableid IN(
 	SELECT id FROM tables WHERE isPublic = 1
 )";
 $result = mysqli_query($link, $query);
-for($data = []; $row = mysqli_fetch_assoc($result); $data[] = $row);
+for($records = []; $row = mysqli_fetch_assoc($result); $records[] = $row);
 
-if()/*
-нужно сделать разделения на разные таблицы
-и чтобы таблица была под спойлером
+//Get id from public tables 
+$query = "SELECT id, name, date FROM tables WHERE isPublic = 1";
+$result = mysqli_query($link, $query);
+for($tables = []; $row = mysqli_fetch_assoc($result); $tables[] = $row);
 
-apache_2.4-php_7.0
-php_7.1-x64
-MariaDB-10.3-x64
-*/
+//output tables
+foreach ($tables as $table) 
 {
-	echo "<table class='tables' border='1px'>
-		<tr>
-			<th>№</th>
-			<th>Фамилие И. О.</th>
-			<th>1</th>
-			<th>2</th>
-			<th>3</th>
-			<th>4</th>
-			<th>5</th>
-			<th>avg</th>
-		</tr>";
-		$num = 0;
-	foreach ($data as $item) {
-		$num++;
-		echo "<td>$num</td>";
-		echo "<td>".$item['fio']."</td>";
-		echo "<td>".$item['try1']."</td>";
-		echo "<td>".$item['try2']."</td>";
-		echo "<td>".$item['try3']."</td>";
-		echo "<td>".$item['try4']."</td>";
-		echo "<td>".$item['try5']."</td>";
-		echo "<td>".$item['avg']."</td>";
+	foreach ($records as $item) 
+	{
+		if($item['tableid'] == $table['id'])
+			$data[] = $item;
 	}
-	echo "</table>";
+	PrintTable($data, $table['name'], $table['date']);
+	unset($data);
 }
 ?>
 	</main>
