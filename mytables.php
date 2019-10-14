@@ -17,10 +17,10 @@ include "PHPFunctions.php";
 include "DBconnect.php";
 
 //Get all users records 
-$query = "SELECT tableid, fio, try1, try2, try3, try4, try5, avg 
-FROM records WHERE tableid IN(
+$query = "SELECT id, tableid, fio, try1, try2, try3, try4, try5, avg 
+FROM records WHERE owner IN(
 	SELECT id FROM users WHERE login = '".$_SESSION['sign']."'
-)";
+) ORDER BY avg";
 $result = mysqli_query($link, $query);
 for($records = []; $row = mysqli_fetch_assoc($result); $records[] = $row);
 
@@ -34,15 +34,21 @@ for($tables = []; $row = mysqli_fetch_assoc($result); $tables[] = $row);
 //output tables
 foreach ($tables as $table) 
 {
+	$data = [];
 	foreach ($records as $item) 
 	{
 		if($item['tableid'] == $table['id'])
 			$data[] = $item;
 	}
-	PrintTable($data, $table['name'], $table['date'], true);
+	PrintTable($data, $table['name'], $table['date'], $table['id'], true);
+	
 	unset($data);
 }
 ?>
+		<div class="newTable">
+			<input type="text" class="newTableName" placeholder="Название таблицы">
+			<button class="AddTable focusOff" onclick="CreateTable()">Добавить таблицу</button>
+		</div>
 	</main>
 </body>
 </html>

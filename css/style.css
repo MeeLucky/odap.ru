@@ -96,7 +96,7 @@ main {
 	background: white;
 	max-width: 715px;
 	min-width: 500px;
-	height: 500px;
+	min-height: 500px;
 	border-radius: 5px;
 }
 
@@ -137,9 +137,7 @@ details {
 	padding: 0px;
 }
 
-.delTable:focus { outline: none; }
-.addRecord:focus { outline: none; }
-.delRecord:focus { outline: none; }
+.focusOff:focus { outline: none; }
 
 .delTable {
 	background: #ff0000;
@@ -148,6 +146,7 @@ details {
 	font-size: 16px;
 	font-weight: 700;
 	padding: 5px 8px;
+	margin-top: 10px;
 }
 
 .delRecord {
@@ -158,3 +157,10 @@ details {
 	color: white;
 	font-family: cursive;
 }
+
+.newTable {
+	padding: 20px;
+}
+
+.green { color: lime; }
+.red { color: red; }
