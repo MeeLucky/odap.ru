@@ -122,13 +122,34 @@ function CreateTable ()
 		success: function (response) {
 			if(response == 1)
 				location.reload();
-
-			console.log(response);
+			else
+				console.log("response: "+response);
 		}
 	});
 }
 
-function ChangeIsPublic (id)
+function ChangePublic (id, newState)
 {
+		console.log(newState);
+	if(newState == 1)
+	{
+		if(!confirm("Открыть таблицу для общего просмотра?"))
+			return;
+	}
+	else
+	{
+		if(!confirm("Закрыть таблицу от общего просмотра?"))
+			return;
+	}
 	
+	$.ajax({
+		url: "AjaxScripts/ChangePublic.php",
+		data: "id="+id+"&newState="+newState,
+		success: function (response) {
+			if(response == 1)
+				location.reload();
+			else
+				console.log("response: "+response);
+		}
+	});
 }

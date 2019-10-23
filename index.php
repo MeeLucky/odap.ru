@@ -16,13 +16,10 @@ $query = "SELECT tableid, fio, try1, try2, try3, try4, try5, avg
 FROM records WHERE tableid IN(
 	SELECT id FROM tables WHERE isPublic = 1
 ) ORDER BY avg";
-$result = mysqli_query($link, $query);
-for($records = []; $row = mysqli_fetch_assoc($result); $records[] = $row);
+$records = DBQuery($query);
 
 //Get id from public tables 
-$query = "SELECT id, name, date FROM tables WHERE isPublic = 1";
-$result = mysqli_query($link, $query);
-for($tables = []; $row = mysqli_fetch_assoc($result); $tables[] = $row);
+$tables = DBQuery("SELECT id, name, date FROM tables WHERE isPublic = 1");
 
 //output tables
 foreach ($tables as $table) 

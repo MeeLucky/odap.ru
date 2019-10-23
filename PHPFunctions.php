@@ -1,5 +1,5 @@
 <?php #functions
-function PrintTable ($data, $tableName, $tableDate, $tableId = null, $isPrivate = false) 
+function PrintTable ($data, $tableName, $tableDate, $tableIsPublic = null, $tableId = null, $isPrivate = false) 
 {
 	if($isPrivate)
 	{
@@ -60,6 +60,13 @@ function PrintTable ($data, $tableName, $tableDate, $tableId = null, $isPrivate 
 		if($isPrivate)
 		{
 			echo "<button class='delTable focusOff' onclick='DelTable($tableId)'><span>X</span> удалить таблицу</button>";
+
+			echo "<button class='delTable focusOff' id='DefaultButton' ";
+			if($tableIsPublic == 1)
+				echo "onclick='ChangePublic($tableId, 0)'>Закрыть таблицу";
+			else
+				echo "onclick='ChangePublic($tableId, 1)'>Открыть таблицу";
+			echo "</button>";
 		}
 		echo"<hr></details>";
 }
