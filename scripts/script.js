@@ -1,7 +1,7 @@
 function SignIn()
 {
 	$.ajax({
-		url: "elems/formSignIn.php",
+		url: "../elems/formSignIn.php",
 		success: function (response) {
 			$('body').append(response);
 		}
@@ -11,7 +11,7 @@ function SignIn()
 function SignOut()
 {
 	$.ajax({
-		url: "AjaxScripts/SignOut.php",
+		url: "../AjaxScripts/SignOut.php",
 		seccess: function(response) {
 		}
 	});
@@ -25,7 +25,7 @@ function TrySignIn()
 	//valid
 
 	$.ajax({
-		url: "AjaxScripts/SignIn.php",
+		url: "../AjaxScripts/SignIn.php",
 		type: 'post',
 		data: 'login='+login+"&password="+password,
 		success: function (response) {
@@ -46,7 +46,7 @@ function CloseForm ()
 function ShowFormAddRecord (this_)
 {
 	$.ajax({
-		url: "elems/formAddOneResult.php",
+		url: "../elems/formAddOneResult.php",
 		data: "table="+this_.value,
 		success: function (response) {
 			$('body').append(response);
@@ -60,7 +60,7 @@ function DelTable (id)
 		return;
 
 	$.ajax({
-		url: "AjaxScripts/DelTable.php",
+		url: "../AjaxScripts/DelTable.php",
 		data: "id="+id,
 		success: function (response) {
 			if(response == 1)
@@ -80,7 +80,7 @@ function AddRecord (this_)
 	let try5 = $('input[name="try5"]').val();
 
 	$.ajax({
-		url: "AjaxScripts/AddRecord.php",
+		url: "../AjaxScripts/AddRecord.php",
 		data: "table="+table+"&name="+name+"&try1="+try1+"&try2="+
 		try2+"&try3="+try3+"&try4="+try4+"&try5="+try5,
 		success: function (response) {
@@ -98,7 +98,7 @@ function DelRecord (id)
 		return;
 
 	$.ajax({
-		url: "AjaxScripts/DelRecord.php",
+		url: "../AjaxScripts/DelRecord.php",
 		data: "id="+id,
 		success: function (response) {
 			if(response == 1)
@@ -117,7 +117,7 @@ function CreateTable ()
 	}
 
 	$.ajax({
-		url: "AjaxScripts/CreateNewTable.php",
+		url: "../AjaxScripts/CreateNewTable.php",
 		data: "name="+name,
 		success: function (response) {
 			if(response == 1)
@@ -143,7 +143,7 @@ function ChangePublic (id, newState)
 	}
 	
 	$.ajax({
-		url: "AjaxScripts/ChangePublic.php",
+		url: "../AjaxScripts/ChangePublic.php",
 		data: "id="+id+"&newState="+newState,
 		success: function (response) {
 			if(response == 1)

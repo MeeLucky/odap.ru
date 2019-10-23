@@ -8,8 +8,8 @@
 	<?php include "elems/header.php"?>
 	<main>
 <?php 
-include "PHPFunctions.php";
-include "DBconnect.php";
+include "scripts/PHPFunctions.php";
+include "scripts/DBconnect.php";
 
 //Get all public records
 $query = "SELECT tableid, fio, try1, try2, try3, try4, try5, avg 

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "../PHPFunctions.php";
+include "../scripts/PHPFunctions.php";
 
 $table = $_GET['table'];
 $name = $_GET['name'];
@@ -32,7 +32,7 @@ foreach ($tryes as $item) {
 $avg = round(array_sum($forAvg) / 3);
 $owner = $_SESSION['sign'];
 
-include "../DBconnect.php";
+include "../scripts/DBconnect.php";
 $query = "INSERT INTO 
 records (id, owner, tableid, fio, try1, try2, try3, try4, try5, avg) 
 VALUES (NULL, 

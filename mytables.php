@@ -13,8 +13,8 @@ if(!isset($_SESSION['sign']))
 	echo "Авторизируйтесь";
 	exit();
 }
-include "PHPFunctions.php";
-include "DBconnect.php";
+include "scripts/PHPFunctions.php";
+include "scripts/DBconnect.php";
 
 //Get all users records 
 $query = "SELECT id, tableid, fio, try1, try2, try3, try4, try5, avg 

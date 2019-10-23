@@ -4,7 +4,7 @@ session_start();
 $login = $_POST['login'];
 $password = $_POST['password'];
 
-include "../DBconnect.php";
+include "../scripts/DBconnect.php";
 
 $query = "SELECT login FROM users WHERE login = '$login' AND password = '$password'";
 
