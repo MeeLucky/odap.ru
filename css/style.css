@@ -5,12 +5,14 @@ body {
 	background-attachment: fixed;
 	margin: 0px;
 	font-family: Helvetica;
+	min-width: 436px;
 }
 
 /*<HEADER*/
 header {
 	background: #0072ff;
 	max-width: 750px;
+	min-width: 436px;
 	height: 70px;
 	margin: 0 auto;
 	border-bottom-right-radius: 5em 18em;
@@ -68,8 +70,8 @@ header ul li a:hover {
 .FormCover {
 	position: fixed;
 	background: #00000099;
-	width: 100vw;
-	height: 100vh;
+	width: 200vw;
+	height: 200vh;
 	top: 0px;
 	z-index: 10;
 }
@@ -95,7 +97,6 @@ main {
 	margin-top: 50px;
 	background: white;
 	max-width: 715px;
-	min-width: 500px;
 	min-height: 500px;
 	border-radius: 5px;
 }

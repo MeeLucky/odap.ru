@@ -7,7 +7,7 @@ if(isset($_SESSION['sign']))
 		<li><a onclick='SignOut()'>выйти</a></li>";
 else
 	$result = "<li><a href='../index.php'>результаты соревнований</a></li>
-		<li><a onclick='SignIn()'>Войти</a></li>";
+		<li><a onclick='SignIn()'>войти</a></li>";
 ?>
 <header>
 	<ul>

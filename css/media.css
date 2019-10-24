@@ -1,0 +1,19 @@
+@media screen and (max-width: 1200px) {
+ 
+}
+ 
+@media screen and (max-width:992px) {
+ 
+}
+ 
+@media screen and (max-width: 768px) {
+	.tables {
+		font-size: 16px;
+	}
+}
+ 
+@media screen and (max-width:480px) {
+	.tables {
+		font-size: 14px;
+	}
+}
