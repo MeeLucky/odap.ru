@@ -153,3 +153,48 @@ function ChangePublic (id, newState)
 		}
 	});
 }
+
+function ToFormat (this_) {
+	let res = this_.value;
+
+	let n = res.indexOf('.');
+	if(n > 0)
+	{
+		let str = res.substr(0, n);
+		str += res.substr(n+1, res.length);
+		res = str;
+	}
+	n = res.indexOf(':');
+	if(n > 0)
+	{
+		let str = res.substr(0, n);
+		str += res.substr(n+1, res.length);
+		res = str;
+	}
+
+	if(res.length > 5) return;
+
+	switch(res.length) {
+		case 2:
+			res = res[0] + '.' + res[1];
+			break;
+		case 3:
+			this_.type = "number";
+			res = res[0] + res[1] + '.' + res[2];
+			break;
+		case 4:
+			this_.type = "text";
+			res = res[0]  + ':'
+				+ res[1] + res[2] + '.'
+				+ res[3];
+			break;
+		case 5:
+			res = res[0] + res[1] + ':'
+				+ res[2] + res[3] + '.'
+				+ res[4];
+			break;
+	}
+	
+
+	this_.value = res;
+}

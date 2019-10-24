@@ -1,8 +1,8 @@
 <?php 
 $DB_HOST = 'localhost';
-$DB_NAME = 'root';
+$DB_NAME = 'root';#o95037n0_general
 $DB_PASS = '';
-$DB_DBNAME = 'resultsofcompetitions';
+$DB_DBNAME = 'resultsofcompetitions';#o95037n0_general
 
 $link = mysqli_connect($DB_HOST, $DB_NAME, $DB_PASS, $DB_DBNAME);
 
