@@ -11,7 +11,7 @@ function PrintTable ($data, $tableName, $tableDate, $tableIsPublic = null, $tabl
 <table class='tables' border='1px'>
 	<tr>
 		<th>№</th>
-		<th>Фамилие И. О.</th>
+		<th>Фамилии И. О.</th>
 		<th>1</th>
 		<th>2</th>
 		<th>3</th>
@@ -79,14 +79,14 @@ function TimeToSec ($time)
 
 	$dot = strpos($time, '.');
 	$dot2 = strpos($time, ':');
-
 	$subSec = substr($time, $dot+1);
-	$sec = substr($time, $dot2, 2);
+	$sec = substr($time, $dot2+1, 2);
 	$min = substr($time, 0, $dot2);
 
 	return (int)$min * 60 * 100 + (int)$sec * 100 + (int)$subSec;
 }
 
+function mlog($str){echo "-------<br>$str<br>-------<br>";}
 function SecToTime ($time)
 {
 	unset($subSec);
@@ -100,7 +100,6 @@ function SecToTime ($time)
 		$min = ($sec - $sec % 60) / 60;
 		$sec = $sec % 60;
 	}
-
 	if($min > 0)
 		return "$min:$sec.$subSec";
 	else
