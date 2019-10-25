@@ -34,5 +34,6 @@ foreach ($tables as $table)
 }
 ?>
 	</main>
+<?php include "elems/footer.php"; ?>
 </body>
 </html>

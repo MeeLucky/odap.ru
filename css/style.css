@@ -47,6 +47,10 @@ header ul li a:hover {
 }
 /*HEADER>*/
 
+footer {
+	margin-top: 50px;
+}
+
 /*<ADD FORM*/
 .FormWrapper {
 	position: fixed;

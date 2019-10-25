@@ -47,5 +47,6 @@ foreach ($tables as $table)
 			<button class="AddTable focusOff" onclick="CreateTable()">Добавить таблицу</button>
 		</div>
 	</main>
+<?php include "elems/footer.php"; ?>
 </body>
 </html>
