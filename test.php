@@ -10,7 +10,7 @@
 <?php
 include "scripts/PHPFunctions.php";
 
-$time = "2:32.52";
+$time = "32.52";
 
 $sec = TimeToSec($time);
 $newTime = SecToTime($sec);

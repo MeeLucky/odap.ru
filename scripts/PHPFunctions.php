@@ -76,12 +76,14 @@ function TimeToSec ($time)
 	unset($subSec);
 	unset($sec);
 	unset($min);
-
 	$dot = strpos($time, '.');
 	$dot2 = strpos($time, ':');
 	$subSec = substr($time, $dot+1);
-	$sec = substr($time, $dot2+1, 2);
+	$n = strlen($time) > 5 ? +1 : +0;
+	$sec = substr($time, $dot2+$n, 2);//+1 for xx.xx or  +0 for xx:xx.xx
 	$min = substr($time, 0, $dot2);
+// mlog(strlen($time));
+
 
 	return (int)$min * 60 * 100 + (int)$sec * 100 + (int)$subSec;
 }
@@ -100,6 +102,7 @@ function SecToTime ($time)
 		$min = ($sec - $sec % 60) / 60;
 		$sec = $sec % 60;
 	}
+
 	if($min > 0)
 		return "$min:$sec.$subSec";
 	else
