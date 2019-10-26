@@ -79,6 +79,35 @@ function AddRecord (this_)
 	let try4 = $('input[name="try4"]').val();
 	let try5 = $('input[name="try5"]').val();
 
+	let tryes = [];
+	tryes[0] = try1;
+	tryes[1] = try2;
+	tryes[2] = try3;
+	tryes[3] = try4;
+	tryes[4] = try5;
+
+	for(let i = 0; i < 5; i++)
+	{
+		let item = tryes[i];
+		let len = item.length;
+
+		if(item === undefined || len < 4) 
+		{
+			alert("error " + i);
+			return;
+		}
+
+		for(let j = 0; j < len; j++)
+		{
+			if(Number.isInteger(+item[j]) || item[j] == "."
+				|| item[j] == ":" || item[j] == ",")
+				console.log('ok')
+			else
+				return;
+		}
+		
+	}
+
 	$.ajax({
 		url: "../AjaxScripts/AddRecord.php",
 		data: "table="+table+"&name="+name+"&try1="+try1+"&try2="+
