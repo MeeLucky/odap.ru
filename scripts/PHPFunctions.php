@@ -59,6 +59,9 @@ function PrintTable ($data, $tableName, $tableDate, $tableIsPublic = null, $tabl
 		echo "</table>";
 		if($isPrivate)
 		{
+			echo "<details>";
+			echo "<summary>Настройки</summary>";
+			
 			echo "<button class='delTable focusOff' onclick='DelTable($tableId)'><span>X</span> удалить таблицу</button>";
 
 			echo "<button class='delTable focusOff' id='DefaultButton' ";
@@ -67,6 +70,9 @@ function PrintTable ($data, $tableName, $tableDate, $tableIsPublic = null, $tabl
 			else
 				echo "onclick='ChangePublic($tableId, 1)'>Открыть таблицу";
 			echo "</button>";
+
+			echo "<br>";
+			echo "</details>";
 		}
 		echo"<hr></details>";
 }
