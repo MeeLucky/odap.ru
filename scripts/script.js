@@ -227,3 +227,25 @@ function ToFormat (this_) {
 
 	this_.value = res;
 }
+
+function Rename (id)
+{
+	let newname = $('.t'+id).val().trim();
+	if(newname.length < 3) {
+		alert('Слишком короткое название');
+		return;
+	}
+	if(newname.length > 100) {
+		alert('Слишком длинное название');
+		return;
+	}
+
+	$.ajax({
+		url: '../AjaxScripts/Rename.php',
+		data: 'id='+id+'&newname='+newname,
+		success: function (response) {
+			if(response == 1)
+				location.reload();
+		}
+	});
+}

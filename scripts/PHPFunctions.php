@@ -61,17 +61,18 @@ function PrintTable ($data, $tableName, $tableDate, $tableIsPublic = null, $tabl
 		{
 			echo "<details>";
 			echo "<summary>Настройки</summary>";
-			
+
 			echo "<button class='delTable focusOff' onclick='DelTable($tableId)'><span>X</span> удалить таблицу</button>";
 
 			echo "<button class='delTable focusOff' id='DefaultButton' ";
 			if($tableIsPublic == 1)
-				echo "onclick='ChangePublic($tableId, 0)'>Закрыть таблицу";
+				echo "onclick='ChangePublic($tableId, 0)'>закрыть таблицу";
 			else
-				echo "onclick='ChangePublic($tableId, 1)'>Открыть таблицу";
+				echo "onclick='ChangePublic($tableId, 1)'>открыть таблицу";
 			echo "</button>";
-
 			echo "<br>";
+			echo "<input placeholder='Новое имя' class='renameInput t$tableId'> <button class='delTable focusOff' id='DefaultButton' onclick='Rename($tableId)'>переименовать</button>";
+			#
 			echo "</details>";
 		}
 		echo"<hr></details>";

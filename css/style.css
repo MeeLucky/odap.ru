@@ -4,7 +4,7 @@ body {
 	background-size: cover;
 	background-attachment: fixed;
 	margin: 0px;
-	font-family: Helvetica;
+	/*font-family: Helvetica;*/
 	min-width: 436px;
 }
 
@@ -143,6 +143,10 @@ details {
 }
 
 .focusOff:focus { outline: none; }
+.focusOff:hover {
+	cursor: pointer;
+	opacity: 0.8;
+}
 
 .delTable {
 	background: #ff0000;
@@ -161,7 +165,7 @@ details {
 	font-size: 20px;
 	line-height: 0px;
 	color: white;
-	/*font-family: cursive;*/
+	font-family: inherit;
 }
 
 .newTable {
@@ -174,4 +178,9 @@ details {
 	background: lightgray; 
 	color: black;
 	border-color: darkgray;
+}
+
+.renameInput {
+	font-size: 16px;
+	padding: 4px;
 }
