@@ -73,11 +73,16 @@ function AddRecord (id)
 {
 	let table = id;
 	let name = $('input[name="name"]').val();
-	let try1 = $('input[name="try1"]').val();
-	let try2 = $('input[name="try2"]').val();
-	let try3 = $('input[name="try3"]').val();
-	let try4 = $('input[name="try4"]').val();
-	let try5 = $('input[name="try5"]').val();
+	let try1 = ToFixFormat($('input[name="try1"]').val());
+	let try2 = ToFixFormat($('input[name="try2"]').val());
+	let try3 = ToFixFormat($('input[name="try3"]').val());
+	let try4 = ToFixFormat($('input[name="try4"]').val());
+	let try5 = ToFixFormat($('input[name="try5"]').val());
+
+	if(name.trim() == "") {
+		alert("Заполните имя");
+		return;
+	}
 
 	let tryes = [];
 	tryes[0] = try1;
@@ -180,6 +185,39 @@ function ChangePublic (id, newState)
 				console.log("response: "+response);
 		}
 	});
+}
+
+function ToFixFormat (str) {//fix 2:23.2 to 22.32
+	let val = str.split('');
+
+	let dot1 = val.indexOf('.');
+	let dot2 = val.indexOf(':');
+
+	if(val.length -2 != dot1) {
+		return str;
+	}
+
+	if(dot1 > 0) {
+		let temp = val[dot1];
+		val[dot1] = val[dot1-1]
+		val[dot1-1] = temp;
+	}
+
+	if(dot2 > 0) {
+		let temp = val[dot2];
+		val[dot2] = val[dot2-1]
+		val[dot2-1] = temp;
+	}
+
+	if(val[0] == ":")
+		val[0] = "";
+
+	let len = val.length;
+	let res = "";
+	for(let i = 0; i < len; i++) 
+		res += val[i];
+	
+	return res;
 }
 
 function ToFormat (this_) {

@@ -1,40 +1,41 @@
-<?php
-$time = "6:21.11";
+<script>
+	let val = "2:12,32";
+	console.log(val);
+	val = val.split('');
 
+	let dot1 = val.indexOf(',');
+	let dot2 = val.indexOf(':');
 
-$time = TimeToSec($time);
-echo "<br>-----<br>";
-echo $time;
-
-function toTime($time) {
-	$sec = floor($time);
-	$sub = round(($time - $sec) * 100);
-
-	if($sec >= 60) {
-		$min = floor($sec / 60);
-		$sec = $sec % 60;
+	// console.log(dot1);
+	// console.log(val.length-3);
+	if(val.length -2 != dot1) {
+		console.log("return");
 	}
 
-	if($sub < 10 && $sub >= 0) $sub = "0".$sub;
-	if($sec < 10 && $sec >= 0) $sec = "0".$sec;
-	if($min > 0) $min = $min.":";
-
-	return "$min$sec.$sub";
-}
-
-function toFixed($num)
-{
-	$p = strpos($num, ".");
-
-	return substr($num, 0, $p+3);
-}
-
-function TimeToSec($time) {
-	$dot2 = strpos($time, ':');
-	if($dot2 > 0) {
-		$min = substr($time, 0, $dot2);
-		$time = substr($time, $dot2+1);
+	if(dot1 > 0) {
+		let temp = val[dot1];
+		val[dot1] = val[dot1-1]
+		val[dot1-1] = temp;
 	}
-		
-	return $min * 60 + $time;
-}
+
+	if(dot2 > 0) {
+		let temp = val[dot2];
+		val[dot2] = val[dot2-1]
+		val[dot2-1] = temp;
+	}
+
+	if(val[0] == ":")
+		val[0] = "";
+
+	let len = val.length;
+	let res = "";
+	for(let i = 0; i < len; i++) 
+		res += val[i];
+	
+
+	console.log(res.trim());
+
+	// console.log(dot1 + " : " + dot2);
+
+	// console.log(res);
+</script>
