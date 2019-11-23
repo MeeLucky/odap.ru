@@ -11,11 +11,11 @@ function SignIn()
 function SignOut()
 {
 	$.ajax({
-		url: "../AjaxScripts/SignOut.php",
+		url: "../ajax/SignOut.php",
 		seccess: function(response) {
+			location.reload();
 		}
 	});
-	location.reload();
 }
 
 function TrySignIn()
@@ -25,13 +25,13 @@ function TrySignIn()
 	//valid
 
 	$.ajax({
-		url: "../AjaxScripts/SignIn.php",
+		url: "../ajax/SignIn.php",
 		type: 'post',
 		data: 'login='+login+"&password="+password,
 		success: function (response) {
 			console.log(response);
-			if(response !== true) {
-				 location.reload();
+			if(response != 1) {
+				  location.reload();
 			}
 		}
 	});
@@ -43,11 +43,11 @@ function CloseForm ()
 }
 
 //referens:  PHPFunctions.php>PrintTable()
-function ShowFormAddRecord (this_)
+function ShowFormAddRecord (id)//table id
 {
 	$.ajax({
 		url: "../elems/formAddOneResult.php",
-		data: "table="+this_.value,
+		data: "id="+id,
 		success: function (response) {
 			$('body').append(response);
 		}
@@ -58,20 +58,20 @@ function DelTable (id)
 {
 	if(!confirm("Вы уверены что хотите удалит таблицу?"))
 		return;
-
 	$.ajax({
-		url: "../AjaxScripts/DelTable.php",
+		url: "../ajax/DelTable.php",
 		data: "id="+id,
 		success: function (response) {
+			console.log(response);
 			if(response == 1)
 				location.reload();
 		}
 	});
 }
 
-function AddRecord (this_) 
+function AddRecord (id) 
 {
-	let table = this_.value;
+	let table = id;
 	let name = $('input[name="name"]').val();
 	let try1 = $('input[name="try1"]').val();
 	let try2 = $('input[name="try2"]').val();
@@ -93,45 +93,44 @@ function AddRecord (this_)
 
 		if(item === undefined || len < 4) 
 		{
-			alert("error " + i);
+			alert((i + 1) + " попытка записана некорректно");
 			return;
 		}
 
 		for(let j = 0; j < len; j++)
 		{
-			if(Number.isInteger(+item[j]) || item[j] == "."
-				|| item[j] == ":" || item[j] == ",")
-				console.log('ok')
-			else
+			if(!(Number.isInteger(+item[j]) || item[j] == "."
+				|| item[j] == ":" || item[j] == ","))
 				return;
 		}
-		
 	}
 
 	$.ajax({
-		url: "../AjaxScripts/AddRecord.php",
-		data: "table="+table+"&name="+name+"&try1="+try1+"&try2="+
+		url: "../ajax/AddRecord.php",
+		data: "tableid="+table+"&name="+name+"&try1="+try1+"&try2="+
 		try2+"&try3="+try3+"&try4="+try4+"&try5="+try5,
 		success: function (response) {
-			if(response == 1)
-			{
-				location.reload();
+			if(response == 1) {
+				CloseForm();
+				refreshTable(table);
 			}
+			else
+				console.log(response);
 		}
 	});
 }
 
-function DelRecord (id)
+function DelRecord (id, tableId)
 {
 	if(!confirm("Вы уверены что хотите удалит запись?"))
 		return;
 
 	$.ajax({
-		url: "../AjaxScripts/DelRecord.php",
-		data: "id="+id,
+		url: "../ajax/DelRecord.php",
+		data: "id="+id+"&tableId="+tableId,
 		success: function (response) {
-			if(response == 1)
-				location.reload();
+			if(response != 0)
+				refreshTable(response);
 		}
 	});
 }
@@ -146,7 +145,7 @@ function CreateTable ()
 	}
 
 	$.ajax({
-		url: "../AjaxScripts/CreateNewTable.php",
+		url: "../ajax/CreateNewTable.php",
 		data: "name="+name,
 		success: function (response) {
 			if(response == 1)
@@ -172,7 +171,7 @@ function ChangePublic (id, newState)
 	}
 	
 	$.ajax({
-		url: "../AjaxScripts/ChangePublic.php",
+		url: "../ajax/ChangePublic.php",
 		data: "id="+id+"&newState="+newState,
 		success: function (response) {
 			if(response == 1)
@@ -235,17 +234,80 @@ function Rename (id)
 		alert('Слишком короткое название');
 		return;
 	}
+
 	if(newname.length > 100) {
 		alert('Слишком длинное название');
 		return;
 	}
+ 
+	let oldname = $('#tableSummary'+id).html();
+	let p = oldname.indexOf('|');
+	oldname = oldname.substr(0, p-1).trim();
+	if(oldname == newname) {
+		alert("Таблица "+oldname+" переименована в "+newname+". Всё как раньше.");
+		return;
+	}
 
 	$.ajax({
-		url: '../AjaxScripts/Rename.php',
+		url: '../ajax/Rename.php',
 		data: 'id='+id+'&newname='+newname,
 		success: function (response) {
-			if(response == 1)
-				location.reload();
+			if(response != 1) {
+				let str = $('#tableSummary'+id).html();
+				let p = str.indexOf('|');
+				str = response + " " + str.substr(p);
+				
+				$('#tableSummary'+id).html(str);
+				alert("Таблица "+oldname+" переименована в "+newname+".");
+			}
+		}
+	});
+}
+
+function UploadFile (id, input)
+{	
+	let file = input.files[0];
+
+	var fd = new FormData();    
+	fd.append('myfile', file);
+	fd.append('id', id);
+
+	$.ajax({
+	  	url: '../ajax/ExcelParse.php',
+	  	data: fd,
+	  	type: 'POST',
+	  	cache: false,
+	  	processData: false,
+	 	 contentType: false,
+	  	success: function(data){
+	    	// console.log(data);
+	    	if(data == 1)
+	    		refreshTable(id);
+	    		alert("Таблица успешно импортирована");
+	  	}
+	});
+}
+
+function refreshTable(id, isPrivate = true) {//id таблицы
+	if($("#table"+id).html().length > 300 && !isPrivate) {
+		let a1 = $("#table"+id).html().length > 300;
+		let a2 = !isPrivate;
+		console.log(a1 + " " + a2);
+		return;//не обновлять если она уже обновлена.
+	} 
+	//если дать не правильный ид выдаст ошибку что лендж = ундефайнед
+
+	let tableName = $("#tableSummary"+id).html();//отрезаем кнопку "добавить"
+
+	let verticalLine = tableName.indexOf("|");
+	if(verticalLine != -1) 
+		tableName = tableName.substr(0, verticalLine).trim();
+
+	$.ajax({//
+		url: '../ajax/GetRecords.php',
+		data: "id="+id+"&tableName="+tableName+"&isPrivate="+isPrivate,
+		success: function (data) {
+			$('#table'+id).html(data);
 		}
 	});
 }

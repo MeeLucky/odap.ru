@@ -1,7 +1,7 @@
 <div class='FormWrapper'>
 	<div class="FormCover" onclick='CloseForm()'></div>
 	<div class='Form addForm'>
-		<input placeholder='Фамилие И. О.' value="Tester" name='name'>
+		<input placeholder='Фамилие И. О.' name='name'>
 		<br>
 		<br>
 		<input placeholder='Попытка 1' onkeypress="ToFormat(this)" autocomplete="off" maxlength="8" type="number" name='try1'><br>
@@ -11,7 +11,6 @@
 		<input placeholder='Попытка 5' onkeypress="ToFormat(this)" autocomplete="off" maxlength="8" type="number" name='try5'>
 		<br>
 		<br>
-		<button <?="value='".$_GET['table']."'"?> 
-		onclick="AddRecord(this)">Добавить</button>
+		<button onclick="AddRecord(<?=$_GET['id']?>)">Добавить</button>
 	</div>
 </div>

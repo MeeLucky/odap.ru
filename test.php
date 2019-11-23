@@ -1,26 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<?php include "elems/head.php"?>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-</head>
-<body>
-	<style>
-		body { background: white; }
-	</style>
 <?php
-include "scripts/PHPFunctions.php";
+$time = "6:21.11";
 
-$time = "32.52";
 
-$sec = TimeToSec($time);
-$newTime = SecToTime($sec);
-echo "time = sec = new time<br>";
-echo "$time = $sec = $newTime";
-?>
+$time = TimeToSec($time);
+echo "<br>-----<br>";
+echo $time;
 
-<div>
-	<span class="event">2019-10-25</span>
-</div>
-</body>
-</html>
+function toTime($time) {
+	$sec = floor($time);
+	$sub = round(($time - $sec) * 100);
+
+	if($sec >= 60) {
+		$min = floor($sec / 60);
+		$sec = $sec % 60;
+	}
+
+	if($sub < 10 && $sub >= 0) $sub = "0".$sub;
+	if($sec < 10 && $sec >= 0) $sec = "0".$sec;
+	if($min > 0) $min = $min.":";
+
+	return "$min$sec.$sub";
+}
+
+function toFixed($num)
+{
+	$p = strpos($num, ".");
+
+	return substr($num, 0, $p+3);
+}
+
+function TimeToSec($time) {
+	$dot2 = strpos($time, ':');
+	if($dot2 > 0) {
+		$min = substr($time, 0, $dot2);
+		$time = substr($time, $dot2+1);
+	}
+		
+	return $min * 60 + $time;
+}

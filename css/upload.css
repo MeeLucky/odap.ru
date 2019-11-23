@@ -1,0 +1,9 @@
+main {
+	max-width: 585px;
+	min-height: 100px;
+	padding: 20px 30px;
+}
+
+.imgWrapper {
+	text-align: center;
+}

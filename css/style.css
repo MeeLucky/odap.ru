@@ -113,6 +113,19 @@ main {
 	margin-top: 5px;
 }
 
+.tables tbody tr td b {
+	color: #000000cf;
+}
+
+.tables tbody tr td img {
+	height: 19px;
+	width: 15px;
+}
+
+.tables tbody tr:hover {
+	background: #d3d3d33f;
+}
+
 summary:focus { outline: none; }
 details {
 	-ms-user-select: none;
@@ -129,6 +142,8 @@ details {
 	font-size: 16px;
 	font-weight: 700;
 	padding: 5px 8px;
+	position: relative;/*нужно чтобы скрыть полоску | */
+	left: -4px;/*а полоска нужна чтобы по ней отрезать кнопку от имени таблицы*/
 }
 
 .delTable span {
@@ -184,3 +199,19 @@ details {
 	font-size: 16px;
 	padding: 4px;
 }
+
+.uploadFileBut {
+	font-size: 16px;
+	padding: 4px;
+}
+
+.newtable {
+	padding-top: 20px; 
+	margin-left: 20px;
+}
+
+.uploadInput {
+	width: 230px;
+	margin-top: 10px;
+}
+
