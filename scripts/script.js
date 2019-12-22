@@ -336,16 +336,42 @@ function refreshTable(id, isPrivate = true) {//id таблицы
 	//если дать не правильный ид выдаст ошибку что лендж = ундефайнед
 
 	let tableName = $("#tableSummary"+id).html();//отрезаем кнопку "добавить"
+	//22.12.2019 не отрезается
 
 	let verticalLine = tableName.indexOf("|");
 	if(verticalLine != -1) 
 		tableName = tableName.substr(0, verticalLine).trim();
 
 	$.ajax({//
-		url: '../ajax/GetRecords.php',
+		url: "../ajax/GetRecords.php",
 		data: "id="+id+"&tableName="+tableName+"&isPrivate="+isPrivate,
 		success: function (data) {
 			$('#table'+id).html(data);
+		}
+	});
+}
+
+function ChangeDescription (id) {//table's id
+	//get text
+	let newd = $('#newDescription'+id).val();
+	let oldd = $('#oldDescription'+id).html();
+	// console.log(newd); console.log(oldd);
+
+	//validate
+	newd = newd.trim();
+	oldd = oldd.trim();
+	if(newd == oldd) {
+		alert("Описание не изменилось");
+		return;
+	}
+
+	//to change
+	$.ajax({
+		url: "../ajax/ChangeDescription.php",
+		data: "id="+id+"&text="+newd,
+		success: function (response) {
+			if(response == 1)
+				refreshTable(id);
 		}
 	});
 }

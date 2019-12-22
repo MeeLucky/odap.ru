@@ -215,3 +215,15 @@ details {
 	margin-top: 10px;
 }
 
+.newDescButton {
+	margin: 0;
+	border-radius: 5px;
+	font-size: 16px;
+	font-family: Arial;
+	border-radius: 5px;
+	font-weight: 700;
+	padding: 5px 8px;
+}
+.newDescInput {
+	margin-top: 10px;
+}

@@ -1,19 +1,23 @@
 <?php
 include "../scripts/DBconnect.php";
+
 $id = $_GET['id'];
 $tableName = $_GET['tableName'];
-$isPrivate = $_GET['isPrivate'];
+$isPrivate = $_GET['isPrivate'];//true - открыто в админке
 
+//получение всех записей открываемой таблицы
 $query = "SELECT * FROM records WHERE tableid = $id ORDER BY avg";
 $records = DBQuery($query);
 
-$query = "SELECT isPublic FROM tables WHERE id = $id";
+//получение занчения публичности. Нужно для функции "открыть/закрыть таблицу"
+//и получение описания таблицы
+$query = "SELECT isPublic, description FROM tables WHERE id = $id";
 $res = DBQuery($query);
 $tableIsPublic = $res[0]['isPublic'];
-
+$tableDescription = $res[0]['description'];
 
 if($isPrivate == "true") {
-//спасибо, динамическая типизация)))))
+//спасибо, динамическая типизация))))))))))))))))))))
 	echo "<summary id='tableSummary$id' onclick='refreshTable(".$id.", $isPrivate)'>".$tableName." |<button class='addRecord focusOff' onclick='ShowFormAddRecord($id)' value='$tableName'>Добавить</button></summary>";
 	//вертикальный слеш нужен для нахождения кнопки
 	//почему бы не искать по кнопке тогда?? странное решение
@@ -21,6 +25,7 @@ if($isPrivate == "true") {
 else{
 	echo "<summary id='tableSummary$id' onclick='refreshTable(".$id.", $isPrivate)'>".$tableName."</summary>";
 }
+	echo "<p id='oldDescription$id'>".$tableDescription."</p>";
 
 	echo "
 <table class='tables' border='1px'>
@@ -72,22 +77,26 @@ else{
 		}
 	}
 		echo "</table>";
-		if($isPrivate == "true")
+		if($isPrivate == "true")//settings
 		{
 			echo "<details>";
 			echo "<summary>Настройки</summary>";
 
 			echo "<button class='delTable focusOff' onclick='DelTable($id)'><span>X</span> удалить таблицу</button>";
-
 			echo "<button class='delTable focusOff' id='DefaultButton' ";
+
 			if($tableIsPublic == 1)
 				echo "onclick='ChangePublic($id, 0)'>закрыть таблицу";
 			else
 				echo "onclick='ChangePublic($id, 1)'>открыть таблицу";
+
 			echo "</button>";
 			echo "<br>";
 			echo "<input placeholder='Новое имя' class='renameInput t$id'> <button class='delTable focusOff' id='DefaultButton' onclick='Rename($id)'>переименовать</button>";
 			echo "<br>";
+			echo "<textarea id='newDescription$id' class='newDescInput' cols='90' rows='3'>$tableDescription</textarea>
+				<br>
+				<button id='DefaultButton' class='newDescButton focusOff' onclick='ChangeDescription($id)'>изменить описание</button>";
 			echo "<div class='tip' data-title='Правильный формат'>
 				<input type='file' class='f$id uploadInput' onchange='UploadFile($id, this)'> 
 				<a href='uploadTip.php' target='_blank' class='tip'>Инструкция</a>
